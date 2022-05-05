@@ -15,15 +15,14 @@ This is a technical test to evaluate your integration and web development knowle
 * Implement search component to search through all beers by their name
 * Elements could be clickable. In the detailed view, more information should be shown (image, name, abv, volume, description, ingredients, food pairing and brewers tips)
  
-## Note
+### Note
 
 * Must demonstrate good development practices. You are free to use coding frameworks to speed up development and ease styling process.
+ 
+The above task should be clear and manageable to be completed within ~2 hours timeframe for the experienced developer. If you have any questions feel free to ask as soon as possible as this is a time-critical task.
+ 
+We aren't providing a skeleton project for this - feel free to use a code generator for your preferred platform (e.g. create-react-app). We will be evaluating this as evidence of your ability to develop quality code, so please keep that in mind and consider test coverage and good principles. **Better to do a smaller deliverable of excellent quality than to provide more features but in a slap-dash fashion.**
  
 ## API for consumption
 
 https://punkapi.com/documentation/v2
- 
-The above task should be clear and manageable to be completed within ~2 hours timeframe for the experienced developer. If you have any questions feel free to ask as soon as possible as this is a time-critical task.
- 
-We aren't providing a skeleton project for this - feel free to use a code generator for your preferred platform (e.g. create-react-app). We will be evaluating this as evidence of your ability to develop quality code, so please keep that in mind and consider test coverage and good principles. Better to do a smaller deliverable of excellent quality than to provide more features but in a slap-dash fashion.
- 
