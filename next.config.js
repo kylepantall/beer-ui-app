@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
         appDir: true,
     },
+    poweredByHeader: false,
 };
 
-export default nextConfig;
+module.exports = nextConfig;
