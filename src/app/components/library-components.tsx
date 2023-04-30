@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 export {
     ThemeProvider,
@@ -8,4 +8,4 @@ export {
     Typography,
     IconButton,
     Card,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';

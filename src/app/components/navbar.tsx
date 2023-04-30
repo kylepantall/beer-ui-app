@@ -1,297 +1,279 @@
-"use client";
+'use client';
 
-import React from "react";
+import React, { Fragment, useState } from 'react';
+import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 import {
-    Navbar,
-    MobileNav,
-    Typography,
-    Button,
-    Menu,
-    MenuHandler,
-    MenuList,
-    MenuItem,
-    Avatar,
-    Card,
-    IconButton,
-} from "@material-tailwind/react";
+    ArrowPathIcon,
+    Bars3Icon,
+    ChartPieIcon,
+    CursorArrowRaysIcon,
+    FingerPrintIcon,
+    SquaresPlusIcon,
+    XMarkIcon,
+} from '@heroicons/react/24/outline';
 import {
-    CubeTransparentIcon,
-    UserCircleIcon,
-    CodeBracketSquareIcon,
-    Square3Stack3DIcon,
     ChevronDownIcon,
-    Cog6ToothIcon,
-    InboxArrowDownIcon,
-    LifebuoyIcon,
-    PowerIcon,
-    RocketLaunchIcon,
-    Bars2Icon,
-} from "@heroicons/react/24/outline";
+    PhoneIcon,
+    PlayCircleIcon,
+} from '@heroicons/react/20/solid';
 
-// profile menu component
-const profileMenuItems = [
+const products = [
     {
-        label: "My Profile",
-        icon: UserCircleIcon,
+        name: 'Analytics',
+        description: 'Get a better understanding of your traffic',
+        href: '#',
+        icon: ChartPieIcon,
     },
     {
-        label: "Edit Profile",
-        icon: Cog6ToothIcon,
+        name: 'Engagement',
+        description: 'Speak directly to your customers',
+        href: '#',
+        icon: CursorArrowRaysIcon,
     },
     {
-        label: "Inbox",
-        icon: InboxArrowDownIcon,
+        name: 'Security',
+        description: 'Your customers’ data will be safe and secure',
+        href: '#',
+        icon: FingerPrintIcon,
     },
     {
-        label: "Help",
-        icon: LifebuoyIcon,
+        name: 'Integrations',
+        description: 'Connect with third-party tools',
+        href: '#',
+        icon: SquaresPlusIcon,
     },
     {
-        label: "Sign Out",
-        icon: PowerIcon,
+        name: 'Automations',
+        description: 'Build strategic funnels that will convert',
+        href: '#',
+        icon: ArrowPathIcon,
     },
 ];
+const callsToAction = [
+    { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
+    { name: 'Contact sales', href: '#', icon: PhoneIcon },
+];
 
-function ProfileMenu() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const closeMenu = () => setIsMenuOpen(false);
-
-    return (
-        <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
-            <MenuHandler>
-                <Button
-                    variant="text"
-                    color="blue-gray"
-                    className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
-                >
-                    <Avatar
-                        variant="circular"
-                        size="sm"
-                        alt="candice wu"
-                        className="border border-blue-500 p-0.5"
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-                    />
-                    <ChevronDownIcon
-                        strokeWidth={2.5}
-                        className={`h-3 w-3 transition-transform ${
-                            isMenuOpen ? "rotate-180" : ""
-                        }`}
-                    />
-                </Button>
-            </MenuHandler>
-            <MenuList className="p-1">
-                {profileMenuItems.map(({ label, icon }, key) => {
-                    const isLastItem = key === profileMenuItems.length - 1;
-                    return (
-                        <MenuItem
-                            key={label}
-                            onClick={closeMenu}
-                            className={`flex items-center gap-2 rounded ${
-                                isLastItem
-                                    ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                    : ""
-                            }`}
-                        >
-                            {React.createElement(icon, {
-                                className: `h-4 w-4 ${
-                                    isLastItem ? "text-red-500" : ""
-                                }`,
-                                strokeWidth: 2,
-                            })}
-                            <Typography
-                                as="span"
-                                variant="small"
-                                className="font-normal"
-                                color={isLastItem ? "red" : "inherit"}
-                            >
-                                {label}
-                            </Typography>
-                        </MenuItem>
-                    );
-                })}
-            </MenuList>
-        </Menu>
-    );
+function classNames(...classes: any[]) {
+    return classes.filter(Boolean).join(' ');
 }
 
-// nav list menu
-const navListMenuItems = [
-    {
-        title: "@material-tailwind/html",
-        description:
-            "Learn how to use @material-tailwind/html, packed with rich components and widgets.",
-    },
-    {
-        title: "@material-tailwind/react",
-        description:
-            "Learn how to use @material-tailwind/react, packed with rich components for React.",
-    },
-    {
-        title: "Material Tailwind PRO",
-        description:
-            "A complete set of UI Elements for building faster websites in less time.",
-    },
-];
-
-function NavListMenu() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-    const triggers = {
-        onMouseEnter: () => setIsMenuOpen(true),
-        onMouseLeave: () => setIsMenuOpen(false),
-    };
-
-    const renderItems = navListMenuItems.map(({ title, description }) => (
-        <a href="#" key={title}>
-            <MenuItem>
-                <Typography variant="h6" color="blue-gray" className="mb-1">
-                    {title}
-                </Typography>
-                <Typography
-                    variant="small"
-                    color="gray"
-                    className="font-normal"
-                >
-                    {description}
-                </Typography>
-            </MenuItem>
-        </a>
-    ));
+export default function Example() {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <React.Fragment>
-            <Menu open={isMenuOpen} handler={setIsMenuOpen}>
-                <MenuHandler>
-                    <Typography
-                        as="a"
-                        href="#"
-                        variant="small"
-                        className="font-normal"
-                    >
-                        <MenuItem
-                            {...triggers}
-                            className="hidden items-center gap-2 text-blue-gray-900 lg:flex lg:rounded-full"
-                        >
-                            <Square3Stack3DIcon className="h-[18px] w-[18px]" />{" "}
-                            Pages{" "}
-                            <ChevronDownIcon
-                                strokeWidth={2}
-                                className={`h-3 w-3 transition-transform ${
-                                    isMenuOpen ? "rotate-180" : ""
-                                }`}
-                            />
-                        </MenuItem>
-                    </Typography>
-                </MenuHandler>
-                <MenuList
-                    {...triggers}
-                    className="hidden w-[36rem] grid-cols-7 gap-3 overflow-visible lg:grid"
-                >
-                    <Card
-                        color="blue"
-                        shadow={false}
-                        variant="gradient"
-                        className="col-span-3 grid h-full w-full place-items-center rounded-md"
-                    >
-                        <RocketLaunchIcon
-                            strokeWidth={1}
-                            className="h-28 w-28"
+        <header className="bg-white">
+            <nav
+                className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+                aria-label="Global"
+            >
+                <div className="flex lg:flex-1">
+                    <a href="#" className="-m-1.5 p-1.5">
+                        <span className="sr-only">Your Company</span>
+                        <img
+                            className="h-8 w-auto"
+                            src="./icons/ale-yeah-icon-yellow-no-bg.svg"
+                            alt=""
                         />
-                    </Card>
-                    <ul className="col-span-4 flex w-full flex-col gap-1">
-                        {renderItems}
-                    </ul>
-                </MenuList>
-            </Menu>
-            <MenuItem className="flex items-center gap-2 text-blue-gray-900 lg:hidden">
-                <Square3Stack3DIcon className="h-[18px] w-[18px]" /> Pages{" "}
-            </MenuItem>
-            <ul className="ml-6 flex w-full flex-col gap-1 lg:hidden">
-                {renderItems}
-            </ul>
-        </React.Fragment>
-    );
-}
-
-// nav list component
-const navListItems = [
-    {
-        label: "Account",
-        icon: UserCircleIcon,
-    },
-    {
-        label: "Blocks",
-        icon: CubeTransparentIcon,
-    },
-    {
-        label: "Docs",
-        icon: CodeBracketSquareIcon,
-    },
-];
-
-function NavList() {
-    return (
-        <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-            <NavListMenu />
-            {navListItems.map(({ label, icon }, key) => (
-                <Typography
-                    key={label}
-                    as="a"
-                    href="#"
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal"
-                >
-                    <MenuItem className="flex items-center gap-2 lg:rounded-full">
-                        {React.createElement(icon, {
-                            className: "h-[18px] w-[18px]",
-                        })}{" "}
-                        {label}
-                    </MenuItem>
-                </Typography>
-            ))}
-        </ul>
-    );
-}
-
-export default function NavBar() {
-    const [isNavOpen, setIsNavOpen] = React.useState(false);
-    const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
-
-    React.useEffect(() => {
-        window.addEventListener(
-            "resize",
-            () => window.innerWidth >= 960 && setIsNavOpen(false)
-        );
-    }, []);
-
-    return (
-        <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-full lg:pl-6">
-            <div className="relative mx-auto flex items-center text-blue-gray-900">
-                <Typography
-                    as="a"
-                    href="#"
-                    className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
-                >
-                    Material Tailwind
-                </Typography>
-                <div className="absolute top-2/4 left-2/4 hidden -translate-x-2/4 -translate-y-2/4 lg:block">
-                    <NavList />
+                    </a>
                 </div>
-                <IconButton
-                    size="sm"
-                    color="blue-gray"
-                    variant="text"
-                    onClick={toggleIsNavOpen}
-                    className="ml-auto mr-2 lg:hidden"
-                >
-                    <Bars2Icon className="h-6 w-6" />
-                </IconButton>
-                <ProfileMenu />
-            </div>
-            <MobileNav open={isNavOpen} className="overflow-scroll">
-                <NavList />
-            </MobileNav>
-        </Navbar>
+                <div className="flex lg:hidden">
+                    <button
+                        type="button"
+                        className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                        onClick={() => setMobileMenuOpen(true)}
+                    >
+                        <span className="sr-only">Open main menu</span>
+                        <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
+                <Popover.Group className="hidden lg:flex lg:gap-x-12">
+                    <Popover className="relative">
+                        <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+                            Product
+                            <ChevronDownIcon
+                                className="h-5 w-5 flex-none text-gray-400"
+                                aria-hidden="true"
+                            />
+                        </Popover.Button>
+
+                        <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-200"
+                            enterFrom="opacity-0 translate-y-1"
+                            enterTo="opacity-100 translate-y-0"
+                            leave="transition ease-in duration-150"
+                            leaveFrom="opacity-100 translate-y-0"
+                            leaveTo="opacity-0 translate-y-1"
+                        >
+                            <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                                <div className="p-4">
+                                    {products.map((item) => (
+                                        <div
+                                            key={item.name}
+                                            className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                                        >
+                                            <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                                                <item.icon
+                                                    className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
+                                                    aria-hidden="true"
+                                                />
+                                            </div>
+                                            <div className="flex-auto">
+                                                <a
+                                                    href={item.href}
+                                                    className="block font-semibold text-gray-900"
+                                                >
+                                                    {item.name}
+                                                    <span className="absolute inset-0" />
+                                                </a>
+                                                <p className="mt-1 text-gray-600">
+                                                    {item.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                                    {callsToAction.map((item) => (
+                                        <a
+                                            key={item.name}
+                                            href={item.href}
+                                            className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
+                                        >
+                                            <item.icon
+                                                className="h-5 w-5 flex-none text-gray-400"
+                                                aria-hidden="true"
+                                            />
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            </Popover.Panel>
+                        </Transition>
+                    </Popover>
+
+                    <a
+                        href="#"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                    >
+                        Features
+                    </a>
+                    <a
+                        href="#"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                    >
+                        Marketplace
+                    </a>
+                    <a
+                        href="#"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                    >
+                        Company
+                    </a>
+                </Popover.Group>
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                    <a
+                        href="#"
+                        className="text-sm font-semibold leading-6 text-gray-900"
+                    >
+                        Log in <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+            </nav>
+            <Dialog
+                as="div"
+                className="lg:hidden"
+                open={mobileMenuOpen}
+                onClose={setMobileMenuOpen}
+            >
+                <div className="fixed inset-0 z-10" />
+                <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                    <div className="flex items-center justify-between">
+                        <a href="#" className="-m-1.5 p-1.5">
+                            <span className="sr-only">Your Company</span>
+                            <img
+                                className="h-8 w-auto"
+                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                                alt=""
+                            />
+                        </a>
+                        <button
+                            type="button"
+                            className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            <span className="sr-only">Close menu</span>
+                            <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                    </div>
+                    <div className="mt-6 flow-root">
+                        <div className="-my-6 divide-y divide-gray-500/10">
+                            <div className="space-y-2 py-6">
+                                <Disclosure as="div" className="-mx-3">
+                                    {({ open }) => (
+                                        <>
+                                            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 hover:bg-gray-50">
+                                                Product
+                                                <ChevronDownIcon
+                                                    className={classNames(
+                                                        open
+                                                            ? 'rotate-180'
+                                                            : '',
+                                                        'h-5 w-5 flex-none'
+                                                    )}
+                                                    aria-hidden="true"
+                                                />
+                                            </Disclosure.Button>
+                                            <Disclosure.Panel className="mt-2 space-y-2">
+                                                {[
+                                                    ...products,
+                                                    ...callsToAction,
+                                                ].map((item) => (
+                                                    <Disclosure.Button
+                                                        key={item.name}
+                                                        as="a"
+                                                        href={item.href}
+                                                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                                    >
+                                                        {item.name}
+                                                    </Disclosure.Button>
+                                                ))}
+                                            </Disclosure.Panel>
+                                        </>
+                                    )}
+                                </Disclosure>
+                                <a
+                                    href="#"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                >
+                                    Features
+                                </a>
+                                <a
+                                    href="#"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                >
+                                    Marketplace
+                                </a>
+                                <a
+                                    href="#"
+                                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                >
+                                    Company
+                                </a>
+                            </div>
+                            <div className="py-6">
+                                <a
+                                    href="#"
+                                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                >
+                                    Log in
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </Dialog.Panel>
+            </Dialog>
+        </header>
     );
 }
