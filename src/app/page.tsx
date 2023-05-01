@@ -1,11 +1,38 @@
-import { Hero } from './components/hero';
-import { NavBar } from './components/nav';
+'use client';
 
-export default async function Home() {
+import { useEffect, useState } from 'react';
+import { Card, Hero, NavBar, Container } from './components';
+import Beer from './interfaces/beer';
+import { getBeers } from './lib/beers';
+
+const BeersFetcher = ({
+  setBeers,
+  children,
+}: {
+  setBeers: (beers: Beer[]) => void;
+  children: JSX.Element | JSX.Element[];
+}) => {
+  useEffect(() => {
+    getBeers().then((beers) => setBeers(beers));
+  }, [setBeers]);
+
+  return <>{children}</>;
+};
+
+export default function Home() {
+  const [beers, setBeers] = useState<Beer[]>([]);
+
   return (
     <>
-      <NavBar links={[{ link: '/', label: 'Home' }]} />
+      <NavBar />
       <Hero />
+      <Container>
+        <BeersFetcher setBeers={setBeers}>
+          {beers.map((beer) => (
+            <Card key={beer.id} {...beer} />
+          ))}
+        </BeersFetcher>
+      </Container>
     </>
   );
 }

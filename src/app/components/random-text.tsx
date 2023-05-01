@@ -1,5 +1,7 @@
-import { createStyles, Text, Transition } from '@mantine/core';
-import { useState, useEffect } from 'react';
+'use client';
+
+import { createStyles } from '@mantine/core';
+import { TypeAnimation } from 'react-type-animation';
 
 const useStyles = createStyles((theme) => ({
   highlight: {
@@ -7,38 +9,29 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function getRandomText(): string {
-  const randomText: string[] = [
-    'favorite',
-    'best',
-    'most delicious',
-    'most amazing',
-    'most awesome',
-    'fizziest',
-    'most refreshing',
-    'bubbliest',
-  ];
+const sequences = [
+  ['fizzy', 1000],
+  ['favorite', 1000],
+  ['frosty', 1300],
+  ['fresh', 1200],
+  ['flavorful', 1400],
+  ['bubbly', 1200],
+  ['bold', 1100],
+  ['aromatic', 1200],
+  ['smooth', 1300],
+  ['rich', 1000],
+];
 
-  return randomText[Math.floor(Math.random() * randomText.length)];
-}
-
-export default function RandomText() {
+export function RandomText(): JSX.Element {
   const { classes } = useStyles();
-  const [randomText, setRandomText] = useState('');
-
-  useEffect(() => {
-    setRandomText(getRandomText());
-    const interval = setInterval(() => setRandomText(getRandomText()), 3000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <Transition transition={'skew-up'} mounted={true}>
-      {(styles) => (
-        <Text styles={styles} component="span" inherit className={classes.highlight}>
-          {randomText}
-        </Text>
-      )}
-    </Transition>
+    <TypeAnimation
+      className={classes.highlight}
+      sequence={sequences.flat()}
+      wrapper="span"
+      repeat={Infinity}
+      speed={50}
+    />
   );
 }

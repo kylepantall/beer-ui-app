@@ -3,7 +3,7 @@
 import { TextInput, TextInputProps, ActionIcon, useMantineTheme } from '@mantine/core';
 import { IconSearch, IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 
-export default function SearchBox(props: TextInputProps) {
+export function SearchBox(props: TextInputProps) {
   const theme = useMantineTheme();
 
   return (

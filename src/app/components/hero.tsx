@@ -1,22 +1,26 @@
 'use client';
 
 import { Title, Text, Container, Overlay, createStyles, rem } from '@mantine/core';
+import { RandomText, SearchBox } from '../components';
 import BeerSplash from '../../../public/beer-splash.jpg';
-import RandomText from './random-text';
-import SearchBox from './search-box';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
     position: 'relative',
-    paddingTop: rem(180),
-    paddingBottom: rem(130),
+    paddingTop: rem(120),
+    paddingBottom: rem(100),
     backgroundImage: `url(${BeerSplash.src})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: `center ${rem(-180)}`,
+
+    [theme.fn.smallerThan('md')]: {
+      backgroundPosition: 'center',
+    },
 
     [theme.fn.smallerThan('xs')]: {
       paddingTop: rem(80),
       paddingBottom: rem(50),
+      backgroundPosition: 'center',
     },
   },
 
@@ -86,7 +90,7 @@ export function Hero() {
 
         <Container size={640}>
           <Text className={classes.description}>
-            Find your next favorite beer! Search for a beer by name, abv, volumne or ingredients...
+            Find your next favorite beer! Search for a beer by name, abv, volume or ingredients...
           </Text>
         </Container>
 

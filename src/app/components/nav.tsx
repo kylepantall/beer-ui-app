@@ -1,24 +1,22 @@
 'use client';
 
-import { useState } from 'react';
-import { createStyles, Header, Group, Container, Burger, rem } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { createStyles, Header, Group, Container, rem } from '@mantine/core';
 import Image from 'next/image';
 import Logo from '../../../public/icons/logo-text-yellow.svg';
 
 const useStyles = createStyles((theme) => ({
   inner: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     height: rem(56),
 
     [theme.fn.smallerThan('sm')]: {
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
     },
   },
 
-  links: {
+  leftItems: {
     width: rem(260),
 
     [theme.fn.smallerThan('sm')]: {
@@ -26,7 +24,7 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  social: {
+  rightItems: {
     width: rem(260),
 
     [theme.fn.smallerThan('sm')]: {
@@ -34,73 +32,17 @@ const useStyles = createStyles((theme) => ({
       marginLeft: 'auto',
     },
   },
-
-  burger: {
-    marginRight: theme.spacing.md,
-
-    [theme.fn.largerThan('sm')]: {
-      display: 'none',
-    },
-  },
-
-  link: {
-    display: 'block',
-    lineHeight: 1,
-    padding: `${rem(8)} ${rem(12)}`,
-    borderRadius: theme.radius.sm,
-    textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
-
-    '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    },
-  },
-
-  linkActive: {
-    '&, &:hover': {
-      backgroundColor: theme.fn.variant({
-        variant: 'light',
-        color: theme.primaryColor,
-      }).background,
-      color: theme.fn.variant({
-        variant: 'light',
-        color: theme.primaryColor,
-      }).color,
-    },
-  },
 }));
 
-export function NavBar({ links }: { links: { link: string; label: string }[] }) {
-  const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
-  const { classes, cx } = useStyles();
-
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={cx(classes.link, {
-        [classes.linkActive]: active === link.link,
-      })}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-      }}>
-      {link.label}
-    </a>
-  ));
+export function NavBar() {
+  const { classes } = useStyles();
 
   return (
     <Header height={56}>
       <Container className={classes.inner}>
-        <Burger opened={opened} onClick={toggle} size="sm" className={classes.burger} />
-        <Group className={classes.links} spacing={5}>
-          {items}
-        </Group>
+        <Group className={classes.leftItems} spacing={5}></Group>
         <Image src={Logo} height={70} alt="Ale! Yeah Logo" />
-        <Group spacing={0} className={classes.social} position="right" noWrap />
+        <Group spacing={0} className={classes.rightItems} position="right" noWrap />
       </Container>
     </Header>
   );
