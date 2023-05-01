@@ -9,7 +9,7 @@ import { IconChevronDown } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useAppData } from '../providers/data.provider';
 import Logo from './logo';
-import { NavItem } from '../interfaces/navbar';
+import { IconNavItem, NavItem, TileDropdownNavItem } from '../interfaces/navbar';
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -76,23 +76,29 @@ export function NavBar(): JSX.Element {
     const { classes, theme } = useStyles();
     const AppData = useAppData();
 
-    const links = AppData.Navigation.Items.map((item: NavItem) => (
-        <UnstyledButton className={classes.subLink} key={item.title}>
-            <Group noWrap align="flex-start">
-                <ThemeIcon size={34} variant="default" radius="md">
-                    <item.icon />
-                </ThemeIcon>
-                <div>
-                    <Text size="sm" fw={500}>
-                        {item.title}s
-                    </Text>
-                    <Text size="xs" color="dimmed">
-                        {item.description}
-                    </Text>
-                </div>
-            </Group>
-        </UnstyledButton>
-    ));
+    AppData.Navigation.Items.filter((Item) => Item?.Icon).map((item) => {
+        if (item.Items[0]?.Icon) {
+            // Do something
+        }
+    });
+
+    // const iconLinks = AppData.Navigation.Items.map(
+    //     (Item: TileDropdownNavItem) => (
+    //         <UnstyledButton className={classes.subLink} key={Item.Title}>
+    //             <Group noWrap align="flex-start">
+    //                 <ThemeIcon size={34} variant="default" radius="md">
+    //                     <Item.Icon />
+    //                 </ThemeIcon>
+    //                 <div>
+    //                     <Text size="sm" fw={500}>{Item.Title}</Text>
+    //                     <Text size="xs" color="dimmed">{Item.Description}</Text>
+    //                 </div>
+    //             </Group>
+    //         </UnstyledButton>
+    //     )
+    // );
+
+    const links = <div></div>;
 
     return (
         <Box pb={120}>
