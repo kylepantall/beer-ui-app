@@ -1,24 +1,17 @@
+import ThemeProvider from './components/theme-provider';
 import './globals.css';
-import DataProvider from './providers/data.provider';
-import {ThemeProvider} from './providers/theme.provider';
 
 export const metadata = {
-    title: 'Ale Yeah!',
-    description: 'A website that celebrates all things ale-related.',
+  title: 'Ale Yeah!',
+  description: 'A website that celebrates all things ale-related.',
 };
 
-export default function RootLayout({children}: {
-    children: JSX.Element;
-}) {
-    return (
-        <html lang="en">
-            <ThemeProvider>
-                <DataProvider>
-                    <body>
-                        {children}
-                    </body>
-                </DataProvider>
-            </ThemeProvider>
-        </html>
-    );
+export default function RootLayout({ children }: { children: JSX.Element }) {
+  return (
+    <html lang="en">
+      <ThemeProvider>
+        <body>{children}</body>
+      </ThemeProvider>
+    </html>
+  );
 }

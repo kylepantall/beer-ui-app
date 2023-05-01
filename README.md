@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Beer UI App
 
-## Getting Started
+This is a technical test to evaluate your integration and web development knowledge. We will accept submissions in any of NodeJS (TypeScript or javascript), PHP, Java and Python.
 
-First, run the development server:
+## Task
+* Implement a simple/slim front-end that:
+  * Integrates with API from provided link below.
+  * Has a list/page of beer items.
+  * Should be limited to 15 items per page.
+  * List component should support pagination so we can navigate through list pages.
+  * Each item in a list should have such information: name, abv, volume and up to 3 ingredient list names
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Extra / Bonus Points
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Implement search component to search through all beers by their name
+* Elements could be clickable. In the detailed view, more information should be shown (image, name, abv, volume, description, ingredients, food pairing and brewers tips)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Note
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+* Must demonstrate good development practices. You are free to use coding frameworks to speed up development and ease styling process.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The above task should be clear and manageable to be completed within ~2 hours timeframe for the experienced developer. If you have any questions feel free to ask as soon as possible as this is a time-critical task.
 
-## Learn More
+We aren't providing a skeleton project for this - feel free to use a code generator for your preferred platform (e.g. create-react-app). We will be evaluating this as evidence of your ability to develop quality code, so please keep that in mind and consider test coverage and good principles. **Better to do a smaller deliverable of excellent quality than to provide more features but in a slap-dash fashion.**
 
-To learn more about Next.js, take a look at the following resources:
+## API for consumption
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://punkapi.com/documentation/v2
