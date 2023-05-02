@@ -4,3 +4,4 @@ export { Hero } from './hero';
 export { NavBar } from './nav';
 export { RandomText } from './random-text';
 export { SearchBox } from './search-box';
+export { ThemeProvider } from './theme-provider';
